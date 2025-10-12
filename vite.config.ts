@@ -27,7 +27,6 @@ export default defineConfig({
             'clsx',
             'tailwind-merge',
             'tailwindcss-animate',
-            'tw-animate-css',
           ],
           utils: ['uuid'],
         },
