@@ -8,6 +8,7 @@ export const buttonVariants = cva(
         primary:
           'bg-blue-600 text-white shadow hover:shadow-lg hover:bg-blue-700 disabled:hover:bg-blue-600 disabled:hover:shadow-none',
         secondary: 'bg-white text-blue-600 border border-blue-600 hover:shadow-lg disabled:hover:shadow-none',
+        tertiary: 'bg-white text-gray-600 border border-gray-100 hover:shadow-lg disabled:hover:shadow-none',
         critical: 'bg-white text-red-600 border border-red-600 hover:shadow-lg disabled:hover:shadow-none',
       },
     },

@@ -16,7 +16,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       <div className="w-full m-2 rounded-xl drop-shadow-xs bg-white">
         <Header toggleShowSidebar={toggleShowSidebar} />
         <main className="relative flex-1 overflow-auto">
-          <div className="m-auto h-full p-2">{children}</div>
+          <div className="m-auto h-full p-4">{children}</div>
         </main>
       </div>
     </div>
