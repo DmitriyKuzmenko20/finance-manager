@@ -8,5 +8,6 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   isDisabled?: boolean
   register?: UseFormRegisterReturn
   error?: string
-  className?: string
+  containerClassName?: string
+  inputClassName?: string
 }

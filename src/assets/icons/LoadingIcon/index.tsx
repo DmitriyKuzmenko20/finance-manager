@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { LoadingIconProps } from './types'
+import { AssetProps } from '@/assets/types'
 
-export const LoadingIcon = ({ className }: LoadingIconProps) => {
+export const LoadingIcon = ({ className }: AssetProps) => {
   return (
     <svg
       aria-hidden="true"

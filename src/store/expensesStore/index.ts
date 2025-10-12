@@ -7,7 +7,7 @@ interface ExpensesState {
   expenses: Expense[]
   setExpenses: (expenses: Expense[]) => void
   addExpense: (expense: Expense) => void
-  deleteExpense: (id: string) => void
+  deleteExpenses: (ids: string[]) => void
   editExpense: (expense: Expense) => void
 }
 
@@ -23,9 +23,9 @@ export const useExpensesStore = create<ExpensesState>()(
         set((state) => {
           state.expenses.push(expense)
         }),
-      deleteExpense: (id) =>
+      deleteExpenses: (ids) =>
         set((state) => {
-          state.expenses = state.expenses.filter((exp) => exp.id !== id)
+          state.expenses = state.expenses.filter((exp) => !ids.includes(exp.id))
         }),
       editExpense: (updatedExpense) =>
         set((state) => {
