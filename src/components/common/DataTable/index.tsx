@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, JSX, useEffect } from 'react'
+import { memo, useMemo, JSX, useEffect } from 'react'
 import clsx from 'clsx'
 import {
   ColumnDef,
@@ -19,10 +19,21 @@ const DataTableComponent = <T extends { id: string }>({
   data,
   columns,
   actions,
+  selectedIds,
   className,
   onSelectChange,
 }: DataTableProps<T>) => {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+  const rowSelection: RowSelectionState = useMemo(() => {
+    const selection: RowSelectionState = {}
+
+    data.forEach((row, index) => {
+      if (selectedIds?.includes(row.id)) {
+        selection[index] = true
+      }
+    })
+
+    return selection
+  }, [data, selectedIds])
 
   const columnsWithSelectors = useMemo<ColumnDef<T>[]>(() => {
     let baseColumns = [...columns]
@@ -83,19 +94,23 @@ const DataTableComponent = <T extends { id: string }>({
   const hasData = table.getRowModel().rows.length > 0
 
   useEffect(() => {
-    if (onSelectChange) {
-      const selectedIds = Object.keys(rowSelection)
-        .filter((index) => rowSelection[Number(index)])
-        .map((index) => data[Number(index)]?.id)
-      onSelectChange(selectedIds)
+    if (selectedIds && onSelectChange) {
+      const validSelectedIds = selectedIds.filter((id) => data.some((row) => row.id === id))
+      if (validSelectedIds.length !== selectedIds.length) {
+        onSelectChange(validSelectedIds)
+      }
     }
-  }, [rowSelection, onSelectChange, data])
+  }, [data, selectedIds, onSelectChange])
 
   function handleRowSelectionChange(updater: RowSelectionState | ((old: RowSelectionState) => RowSelectionState)) {
-    setRowSelection((prev) => {
-      const newSelection = typeof updater === 'function' ? updater(prev) : updater
-      return newSelection
-    })
+    const newSelection = typeof updater === 'function' ? updater(rowSelection) : updater
+
+    const newSelectedIds = Object.keys(newSelection)
+      .filter((index) => newSelection[Number(index)])
+      .map((index) => data[Number(index)]?.id)
+      .filter(Boolean) as string[]
+
+    onSelectChange?.(newSelectedIds)
   }
 
   return (

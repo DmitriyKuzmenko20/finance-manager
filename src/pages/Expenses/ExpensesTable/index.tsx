@@ -1,8 +1,9 @@
 import { memo } from 'react'
 import { ExpensesTableProps } from './types'
-import { Button, DataTable, DebouncedSearchInput } from '@/components'
+import { DataTable } from '@/components'
 import { getActions, getExpenseColumns } from './utils'
 import { useExpenses } from './hooks'
+import { TableFilters } from './TableFilters'
 
 export const ExpensesTable = memo(({ onEditClick }: ExpensesTableProps) => {
   const {
@@ -15,29 +16,23 @@ export const ExpensesTable = memo(({ onEditClick }: ExpensesTableProps) => {
     handleBulkDeleteClick,
   } = useExpenses(onEditClick)
 
-  const hasSelectedIds = selectedIds.length > 0
+  const hasSelectedIds = !!selectedIds.length
 
   const columns = getExpenseColumns()
   const actions = getActions(handleEditClick, handleDeleteClick)
 
   return (
     <div className="mt-4">
-      <div className="flex items-center gap-2">
-        <DebouncedSearchInput
-          placeholder="Search..."
-          containerClassName="!w-64"
-          onDebounceChange={handleSearchChange}
-        />
-        {hasSelectedIds && (
-          <Button variant="critical" onClick={handleBulkDeleteClick}>
-            Delete
-          </Button>
-        )}
-      </div>
+      <TableFilters
+        hasSelectedIds={hasSelectedIds}
+        onSearchChange={handleSearchChange}
+        onBulkDeleteClick={handleBulkDeleteClick}
+      />
       <DataTable
         data={expenses}
         columns={columns}
         actions={actions}
+        selectedIds={selectedIds}
         className="mt-4"
         onSelectChange={handleSelectChange}
       />
