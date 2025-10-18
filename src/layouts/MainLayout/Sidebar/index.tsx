@@ -28,7 +28,7 @@ export const SideBar = memo(({ isShowSidebar, toggleShowSidebar }: SidebarProps)
           <div className="flex items-center justify-between p-2">
             <Link to="/" className="flex items-center gap-2">
               <Logo className="w-10 h-10 rounded" />
-              <h2 className="text-lg font-semibold leading-4 tracking-tighter">Finance Manager</h2>
+              <h2 className="text-lg font-semibold leading-4">Finance Manager</h2>
             </Link>
             <button className="block cursor-pointer lg:hidden" onClick={toggleShowSidebar}>
               <X className=" size-5" />

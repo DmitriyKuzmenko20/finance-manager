@@ -5,6 +5,7 @@ export type DataTableProps<T extends { id: string }> = {
   data: T[]
   columns: ColumnDef<T>[]
   actions?: Action<T>[]
+  selectedIds?: string[]
   className?: string
   onSelectChange?: (selectedIds: string[]) => void
 }

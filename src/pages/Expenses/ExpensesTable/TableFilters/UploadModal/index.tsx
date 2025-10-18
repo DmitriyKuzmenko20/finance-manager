@@ -1,7 +1,7 @@
-import { Modal } from '@/components'
 import { memo, useRef } from 'react'
-import { UploadModalProps } from './types'
 import { Image } from 'lucide-react'
+import { UploadModalProps } from './types'
+import { Modal } from '@/components'
 
 export const UploadModal = memo(
   ({ isOpen, uploadedFile, errors, handleUploadFile, onCloseClick, onSaveClick }: UploadModalProps) => {
@@ -43,7 +43,9 @@ export const UploadModal = memo(
             {hasErrors && (
               <div className="grid gap-1 max-h-64 mt-2 overflow-y-auto no-scrollbar">
                 {errors.map((error) => (
-                  <p key={error} className="text-xs text-red-500">{error}</p>
+                  <p key={error} className="text-xs text-red-500">
+                    {error}
+                  </p>
                 ))}
               </div>
             )}

@@ -44,7 +44,8 @@ export const useExpenses = (onEditClick: (expense: Expense) => void) => {
 
   const handleBulkDeleteClick = useCallback(() => {
     deleteExpenses(selectedIds)
-  }, [selectedIds, deleteExpenses])
+    handleSelectChange([])
+  }, [selectedIds, deleteExpenses, handleSelectChange])
 
   return {
     expenses: filteredExpenses,
