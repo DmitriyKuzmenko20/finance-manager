@@ -83,7 +83,7 @@ export const ManageAssetModal = memo(({ isOpen, initialAsset, onCloseClick, onSa
               render={({ field }) => (
                 <Dropdown
                   options={CATEGORY_OPTIONS}
-                  selectedValue={field.value}
+                  selectedValue={field.value || ''}
                   label="Category"
                   placeholder="Select category"
                   isRequired
