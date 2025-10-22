@@ -18,7 +18,7 @@ export const PageWrapper = memo(
         <header className="flex justify-between items-center mobile:flex-col mobile:items-start gap-2">
           <div>
             {title && <h1 className="text-lg font-medium md:text-2xl">{title}</h1>}
-            {description && <p className="text-sm text-gray-600">{description}</p>}
+            {description && <p className="mt-1 text-sm text-gray-600">{description}</p>}
           </div>
           {actionText && (
             <Button variant={actionButtonVariant} className={actionClassName} onClick={onActionClick}>

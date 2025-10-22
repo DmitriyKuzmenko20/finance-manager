@@ -5,6 +5,7 @@ import { RouteItem } from './types'
 import Dashboard from '@/pages/Dashboard'
 
 const Expenses = React.lazy(() => import('../pages/Expenses'))
+const Assets = React.lazy(() => import('../pages/Assets'))
 
 const routList: RouteItem[] = [
   {
@@ -16,6 +17,14 @@ const routList: RouteItem[] = [
     element: (
       <Suspense>
         <Expenses />
+      </Suspense>
+    ),
+  },
+  {
+    path: ROUTES.ASSETS,
+    element: (
+      <Suspense>
+        <Assets />
       </Suspense>
     ),
   },
