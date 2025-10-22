@@ -1,12 +1,14 @@
 export type DropdownProps = {
   options: DropdownOption[]
-  selectedValue?: string
+  selectedValue: string
   label?: string
   placeholder?: string
   isRequired?: boolean
   isDisabled?: boolean
+  isClearOption?: boolean
   error?: string
-  onChange?: (value: string) => void
+  containerClassName?: string
+  onChange: (value: string | null) => void
 }
 
 export type DropdownOption = {

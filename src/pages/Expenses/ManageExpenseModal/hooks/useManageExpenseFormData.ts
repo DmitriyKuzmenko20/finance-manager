@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { EXPENSE_TYPE } from '@/constant'
-import { Expense, ExpenseType } from '@/store/expensesStore/models'
+import { EXPENSE_CATEGORY, EXPENSE_TYPE } from '@/constant'
+import { Expense, ExpenseCategory, ExpenseType } from '@/store/expensesStore/models'
 import { expenseSchema } from '@/validation'
 
 export type ExpenseFormValues = {
   amount: string
   title: string
   description: string
-  category: string
+  category: ExpenseCategory
   type: ExpenseType
 }
 
@@ -26,7 +26,7 @@ export const useManageExpenseFormData = (initialExpense: Expense | undefined, is
       amount: '',
       title: '',
       description: '',
-      category: '',
+      category: EXPENSE_CATEGORY.OTHER,
       type: EXPENSE_TYPE.BANK,
     },
   })
@@ -37,7 +37,7 @@ export const useManageExpenseFormData = (initialExpense: Expense | undefined, is
         amount: initialExpense?.amount?.toString() || '',
         title: initialExpense?.title || '',
         description: initialExpense?.description || '',
-        category: initialExpense?.category || '',
+        category: initialExpense?.category || EXPENSE_CATEGORY.OTHER,
         type: initialExpense?.type || EXPENSE_TYPE.BANK,
       })
     }

@@ -1,3 +1,4 @@
+import { ExpenseCategory } from './ExpenseCategory'
 import { ExpenseType } from './ExpenseType'
 
 export interface Expense {
@@ -6,7 +7,7 @@ export interface Expense {
   title: string
   description: string
   type: ExpenseType
-  category: string
+  category: ExpenseCategory
   receipt?: string
 }
 

@@ -1,8 +1,8 @@
 import Chart from 'react-apexcharts'
+import { NotepadText } from 'lucide-react'
 import { useExpensesStore } from '@/store'
 import { useChartOptions } from './hooks'
 import { WidgetTitle } from '../WidgetTitle'
-import { Wallet } from 'lucide-react'
 
 export const ExpensesChart = () => {
   const expenses = useExpensesStore((state) => state.expenses)
@@ -13,7 +13,7 @@ export const ExpensesChart = () => {
 
   return (
     <div className="w-full p-4 rounded-xl shadow-sm border md:w-1/2">
-      <WidgetTitle title="Total Expenses" subTitle="See your expenses" icon={<Wallet className="size-4" />} />
+      <WidgetTitle title="Total Expenses" subTitle="See your expenses" icon={<NotepadText className="size-4" />} />
       <div className="flex flex-col items-center justify-center min-h-96">
         {hasExpenses ? (
           <>

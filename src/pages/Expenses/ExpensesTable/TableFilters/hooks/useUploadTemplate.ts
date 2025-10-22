@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback, useState } from 'react'
 import { useExpensesStore } from '@/store'
-import { EXPENSE_TYPE, MAX_AMOUNT_COUNT, MAX_CATEGORY_COUNT, MAX_DESCRIPTION_COUNT, MAX_TITLE_COUNT } from '@/constant'
+import { EXPENSE_CATEGORY, EXPENSE_TYPE, MAX_AMOUNT_COUNT, MAX_DESCRIPTION_COUNT, MAX_TITLE_COUNT } from '@/constant'
 import { TEMPLATE_HEADER } from '../constant'
 import { v4 as uuidv4 } from 'uuid'
-import { BulkExpense, ExpenseType } from '@/store/expensesStore/models'
+import { BulkExpense, ExpenseCategory, ExpenseType } from '@/store/expensesStore/models'
 
 const MAX_FILE_LINES = 100
 const MIN_FILE_LINE_LENGTH = 6
@@ -36,16 +36,20 @@ const validatorMethods: Record<string, ValidatorMethod> = {
 
     return null
   },
-  [TEMPLATE_HEADER.CATEGORY]: (value, rowNumber) => {
-    if (value.length >= MAX_CATEGORY_COUNT) {
-      return `Line ${rowNumber}: category length should be less than ${MAX_CATEGORY_COUNT}`
+  [TEMPLATE_HEADER.TYPE]: (value, rowNumber) => {
+    const validTypes = Object.values(EXPENSE_TYPE) as readonly string[]
+
+    if (!validTypes.includes(value)) {
+      return `Line ${rowNumber}: wrong type`
     }
 
     return null
   },
-  [TEMPLATE_HEADER.TYPE]: (value, rowNumber) => {
-    if (value !== EXPENSE_TYPE.BANK && value !== EXPENSE_TYPE.CASH) {
-      return `Line ${rowNumber}: wrong type, should be ${EXPENSE_TYPE.BANK} or ${EXPENSE_TYPE.CASH}`
+  [TEMPLATE_HEADER.CATEGORY]: (value, rowNumber) => {
+    const validCategories = Object.values(EXPENSE_CATEGORY) as readonly string[]
+
+    if (!validCategories.includes(value)) {
+      return `Line ${rowNumber}: wrong category`
     }
 
     return null
@@ -144,7 +148,7 @@ export const useUploadTemplate = () => {
         title: values[headers.indexOf(TEMPLATE_HEADER.TITLE)],
         description: values[headers.indexOf(TEMPLATE_HEADER.DESCRIPTION)],
         type: values[headers.indexOf(TEMPLATE_HEADER.TYPE)] as ExpenseType,
-        category: values[headers.indexOf(TEMPLATE_HEADER.CATEGORY)],
+        category: values[headers.indexOf(TEMPLATE_HEADER.CATEGORY)] as ExpenseCategory,
       }
 
       expenses.push(expense)
