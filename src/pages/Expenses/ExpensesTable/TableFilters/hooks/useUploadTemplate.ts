@@ -149,6 +149,7 @@ export const useUploadTemplate = () => {
         description: values[headers.indexOf(TEMPLATE_HEADER.DESCRIPTION)],
         type: values[headers.indexOf(TEMPLATE_HEADER.TYPE)] as ExpenseType,
         category: values[headers.indexOf(TEMPLATE_HEADER.CATEGORY)] as ExpenseCategory,
+        date: values[headers.indexOf(TEMPLATE_HEADER.DATE)],
       }
 
       expenses.push(expense)

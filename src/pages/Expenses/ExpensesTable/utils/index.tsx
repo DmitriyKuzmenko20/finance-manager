@@ -63,6 +63,11 @@ export const getExpenseColumns = (): ColumnDef<Expense>[] => [
       return <CategoryLabel text={category} color={color} />
     },
   },
+   {
+    accessorKey: 'date',
+    header: 'Date',
+    cell: ({ row }) => row.getValue('date'),
+  },
 ]
 
 export const getActions = (onEdit: (row: Expense) => void, onDelete: (row: Expense) => void): Action<Expense>[] => [
