@@ -21,7 +21,7 @@ export const useExpensesStore = create<ExpensesState>()(
         }),
       addExpense: (expense) =>
         set((state) => {
-          state.expenses.push(expense)
+          state.expenses.unshift(expense)
         }),
       deleteExpenses: (ids) =>
         set((state) => {

@@ -8,7 +8,7 @@ type ChartData = {
   amount: number
 }
 
-export const useChartOptions = (expenses: Expense[]) => {
+export const useDonutChartOptions = (expenses: Expense[]) => {
   return useMemo(() => {
     const grouped = expenses.reduce<Record<string, number>>((acc, { category, amount }) => {
       acc[category] = (acc[category] || 0) + amount

@@ -27,6 +27,7 @@ export const Input = memo(
           {...register}
           type={type}
           disabled={isDisabled}
+          step="any"
           className={cn(
             'h-8 w-full rounded-md border border-gray-100 px-2 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
             inputClassName

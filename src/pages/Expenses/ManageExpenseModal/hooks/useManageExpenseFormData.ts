@@ -11,6 +11,7 @@ export type ExpenseFormValues = {
   description: string
   category: ExpenseCategory
   type: ExpenseType
+  date: string
 }
 
 export const useManageExpenseFormData = (initialExpense: Expense | undefined, isOpen: boolean) => {
@@ -28,6 +29,7 @@ export const useManageExpenseFormData = (initialExpense: Expense | undefined, is
       description: '',
       category: EXPENSE_CATEGORY.OTHER,
       type: EXPENSE_TYPE.BANK,
+      date: '',
     },
   })
 
@@ -39,6 +41,7 @@ export const useManageExpenseFormData = (initialExpense: Expense | undefined, is
         description: initialExpense?.description || '',
         category: initialExpense?.category || EXPENSE_CATEGORY.OTHER,
         type: initialExpense?.type || EXPENSE_TYPE.BANK,
+        date: initialExpense?.date || '',
       })
     }
   }, [initialExpense, isOpen, reset])

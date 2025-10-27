@@ -8,7 +8,7 @@ export interface Expense {
   description: string
   type: ExpenseType
   category: ExpenseCategory
-  receipt?: string
+  date: string
 }
 
 export type BulkExpense = Omit<Expense, 'receipt'>

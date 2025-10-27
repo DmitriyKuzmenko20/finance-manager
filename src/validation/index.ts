@@ -36,6 +36,7 @@ export const expenseSchema = yup.object({
     .mixed<ExpenseCategory>()
     .oneOf(Object.values(EXPENSE_CATEGORY), 'Invalid expense type')
     .required('Category is required'),
+  date: yup.string().required('Date is required'),
 })
 
 export const assetSchema = yup.object({

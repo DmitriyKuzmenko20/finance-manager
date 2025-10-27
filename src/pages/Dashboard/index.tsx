@@ -1,10 +1,10 @@
 import { PageWrapper } from '@/components'
-import { ExpensesChart } from './ExpensesChart'
+import { ExpensesCharts } from './ExpensesCharts'
 
 const Dashboard = () => {
   return (
     <PageWrapper title="Dashboard" description="Track all your main data here">
-      <ExpensesChart />
+      <ExpensesCharts />
     </PageWrapper>
   )
 }

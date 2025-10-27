@@ -1,9 +1,10 @@
 import { memo } from 'react'
 import { ManageExpenseModalProps } from './types'
-import { Dropdown, Input, Modal, Textarea } from '@/components'
+import { DatePicker, Dropdown, Input, Modal, Textarea } from '@/components'
 import { useManageExpenseFormData } from './hooks'
 import { EXPENSE_TYPE } from '@/constant'
 import { Controller } from 'react-hook-form'
+import { parse } from 'date-fns'
 
 const TYPE_OPTIONS = [
   {
@@ -58,7 +59,6 @@ export const ManageExpenseModal = memo(
             <Controller
               name="type"
               control={control}
-              rules={{ required: 'Type is required' }}
               render={({ field }) => (
                 <Dropdown
                   options={TYPE_OPTIONS}
@@ -70,6 +70,23 @@ export const ManageExpenseModal = memo(
                   onChange={field.onChange}
                 />
               )}
+            />
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => {
+                const selectedDate = field.value ? parse(field.value, 'dd/MM/yyyy', new Date()) : null
+
+                return (
+                  <DatePicker
+                    selectedDate={selectedDate}
+                    label="Date"
+                    isRequired
+                    error={errors.date?.message}
+                    onChange={field.onChange}
+                  />
+                )
+              }}
             />
           </form>
         </>
