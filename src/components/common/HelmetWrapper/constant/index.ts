@@ -13,4 +13,8 @@ export const metaTagsData = {
     title: 'Assets',
     description: 'Track and manage your assets',
   },
+  [ROUTES.TARGETS]: {
+    title: 'Targets',
+    description: 'Set and track spending targets for expense categories',
+  },
 }

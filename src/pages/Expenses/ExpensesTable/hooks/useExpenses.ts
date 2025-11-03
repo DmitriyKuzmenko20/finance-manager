@@ -1,10 +1,11 @@
 import { useExpensesStore } from '@/store'
-import { Expense } from '@/store/expensesStore/models'
+import { Expense, ExpenseCategory } from '@/store/expensesStore/models'
 import { useCallback, useMemo, useState } from 'react'
 
 export const useExpenses = (onEditClick: (expense: Expense) => void) => {
   const [search, setSearch] = useState('')
   const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [selectedCategories, setSelectedCategories] = useState<ExpenseCategory[]>([])
 
   const expenses = useExpensesStore((state) => state.expenses)
   const deleteExpenses = useExpensesStore((state) => state.deleteExpenses)
@@ -12,16 +13,24 @@ export const useExpenses = (onEditClick: (expense: Expense) => void) => {
   const filteredExpenses = useMemo(() => {
     const searchableKeys = ['title', 'description', 'category', 'type', 'amount'] as const
 
-    return expenses.filter((expense) =>
-      searchableKeys.some((key) => {
+    return expenses.filter((expense) => {
+      const matchesSearch = searchableKeys.some((key) => {
         const value = expense[key]
         return String(value).toLowerCase().includes(search.toLowerCase())
       })
-    )
-  }, [expenses, search])
+
+      const matchesCategory = selectedCategories.includes(expense.category)
+
+      return matchesSearch && matchesCategory
+    })
+  }, [expenses, search, selectedCategories])
 
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value)
+  }, [])
+
+  const handleCategoriesChange = useCallback((categories: ExpenseCategory[]) => {
+    setSelectedCategories(categories)
   }, [])
 
   const handleSelectChange = useCallback((ids: string[]) => {
@@ -50,7 +59,9 @@ export const useExpenses = (onEditClick: (expense: Expense) => void) => {
   return {
     expenses: filteredExpenses,
     selectedIds,
+    selectedCategories,
     handleSearchChange,
+    handleCategoriesChange,
     handleSelectChange,
     handleEditClick,
     handleDeleteClick,

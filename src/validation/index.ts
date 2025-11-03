@@ -65,3 +65,42 @@ export const assetSchema = yup.object({
       otherwise: (schema) => schema.optional().nullable(),
     }),
 })
+
+export const targetSchema = yup.object({
+  targetAmount: yup
+    .string()
+    .required('Target amount is required')
+    .test('is-number', 'Target amount must be a number', (value) => !isNaN(Number(value)))
+    .test('positive', 'Target amount must be positive', (value) => (value ? Number(value) > 0 : true))
+    .test('max-amount', `Target amount cannot exceed ${MAX_AMOUNT_COUNT}`, (value) =>
+      value ? Number(value) <= MAX_AMOUNT_COUNT : true
+    ),
+  title: yup
+    .string()
+    .required('Title is required')
+    .max(MAX_TITLE_COUNT, `Title cannot exceed ${MAX_TITLE_COUNT} characters`),
+  description: yup
+    .string()
+    .max(MAX_DESCRIPTION_COUNT, `Description cannot exceed ${MAX_DESCRIPTION_COUNT} characters`)
+    .default(''),
+  category: yup
+    .mixed<ExpenseCategory>()
+    .oneOf(Object.values(EXPENSE_CATEGORY), 'Invalid category')
+    .required('Category is required'),
+  month: yup
+    .string()
+    .required('Month is required')
+    .test('is-valid-month', 'Month must be between 1 and 12', (value) => {
+      if (!value) return false
+      const num = Number(value)
+      return !isNaN(num) && num >= 1 && num <= 12
+    }),
+  year: yup
+    .string()
+    .required('Year is required')
+    .test('is-valid-year', 'Year must be between 2000 and 2100', (value) => {
+      if (!value) return false
+      const num = Number(value)
+      return !isNaN(num) && num >= 2000 && num <= 2100
+    }),
+})

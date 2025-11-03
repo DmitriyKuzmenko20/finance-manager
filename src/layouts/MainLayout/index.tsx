@@ -13,10 +13,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex h-screen w-full gap-1 overflow-hidden bg-layout">
       <SideBar isShowSidebar={isShowSidebar} toggleShowSidebar={toggleShowSidebar} />
-      <div className="w-full m-2 rounded-xl drop-shadow-xs bg-white">
+      <div className="flex flex-col w-full m-2 rounded-xl drop-shadow-xs bg-white overflow-hidden">
         <Header toggleShowSidebar={toggleShowSidebar} />
-        <main className="relative flex-1 overflow-auto">
-          <div className="m-auto h-full p-4">{children}</div>
+        <main className="relative flex-1 overflow-y-auto">
+          <div className="m-auto p-4">{children}</div>
         </main>
       </div>
     </div>
