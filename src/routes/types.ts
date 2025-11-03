@@ -1,9 +1,9 @@
-import React from 'react';
-import { ROUTES } from './constant';
+import React from 'react'
+import { ROUTES } from './constant'
 
 export type RouteItem = {
-	path: RouteValue;
-	element: React.ReactNode;
-};
+  path: RouteValue
+  element: React.ReactNode
+}
 
-type RouteValue = (typeof ROUTES)[keyof typeof ROUTES];
+export type RouteValue = (typeof ROUTES)[keyof typeof ROUTES]

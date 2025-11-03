@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Plus } from 'lucide-react'
 import { useAssetsStore } from '@/store'
 import { Asset } from '@/store/assetsStore/models'
 import { useModal } from '@/hooks'
-import { Plus } from 'lucide-react'
+import { ROUTES } from '@/routes/constant'
 import { AssetFormValues } from './ManageAssetModal/hooks'
-import { PageWrapper } from '@/components'
+import { HelmetWrapper, PageWrapper } from '@/components'
 import { AssetsTable } from './AssetsTable'
 import { ManageAssetModal } from './ManageAssetModal'
 import { ASSET_TYPE } from '@/constant'
@@ -51,21 +52,23 @@ const Assets = () => {
   )
 
   return (
-    <PageWrapper
-      title="Assets"
-      description="Track all your assets here"
-      actionText="Add asset"
-      actionIcon={<Plus className="size-4" />}
-      onActionClick={onOpenClick}
-    >
-      <AssetsTable onEditClick={handleEditAssetClick} />
-      <ManageAssetModal
-        isOpen={isOpen}
-        initialAsset={openedAsset ?? undefined}
-        onCloseClick={handleCloseModalClick}
-        onSaveClick={handleSaveAssetClick}
-      />
-    </PageWrapper>
+    <HelmetWrapper route={ROUTES.ASSETS}>
+      <PageWrapper
+        title="Assets"
+        description="Track all your assets here"
+        actionText="Add asset"
+        actionIcon={<Plus className="size-4" />}
+        onActionClick={onOpenClick}
+      >
+        <AssetsTable onEditClick={handleEditAssetClick} />
+        <ManageAssetModal
+          isOpen={isOpen}
+          initialAsset={openedAsset ?? undefined}
+          onCloseClick={handleCloseModalClick}
+          onSaveClick={handleSaveAssetClick}
+        />
+      </PageWrapper>
+    </HelmetWrapper>
   )
 }
 
