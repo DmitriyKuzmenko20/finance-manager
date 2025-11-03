@@ -10,10 +10,24 @@ import {
   RowSelectionState,
   useReactTable,
 } from '@tanstack/react-table'
+import { motion, Variants } from 'framer-motion'
 import { DataTableProps } from './types'
 import { Button, Checkbox, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components'
 import { EmptyData } from './EmptyData'
 import { Actions } from './Actions'
+
+const tableVariants: Variants = {
+  hidden: { opacity: 0, y: -30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 120,
+      damping: 15,
+    },
+  },
+}
 
 const DataTableComponent = <T extends { id: string }>({
   data,
@@ -114,7 +128,7 @@ const DataTableComponent = <T extends { id: string }>({
   }
 
   return (
-    <div className={clsx('w-full', className)}>
+    <motion.div variants={tableVariants} initial="hidden" animate="show" className={clsx('w-full', className)}>
       <div className="overflow-hidden rounded-md border">
         {hasData ? (
           <Table>
@@ -162,7 +176,7 @@ const DataTableComponent = <T extends { id: string }>({
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
 

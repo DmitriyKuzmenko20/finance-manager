@@ -24,7 +24,6 @@ export const DatePicker = memo(
       },
       [dateFormat, onChange]
     )
-    console.log(selectedDate)
 
     return (
       <div className={containerClassName}>

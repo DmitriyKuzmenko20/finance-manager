@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { Plus } from 'lucide-react'
 import { useExpensesStore } from '@/store'
 import { Expense } from '@/store/expensesStore/models'
 import { useModal } from '@/hooks'
-import { Plus } from 'lucide-react'
+import { ROUTES } from '@/routes/constant'
 import { ExpenseFormValues } from './ManageExpenseModal/hooks'
-import { PageWrapper } from '@/components'
+import { HelmetWrapper, PageWrapper } from '@/components'
 import { ExpensesTable } from './ExpensesTable'
 import { ManageExpenseModal } from './ManageExpenseModal'
 
@@ -49,21 +50,23 @@ const Expenses = () => {
   )
 
   return (
-    <PageWrapper
-      title="Expenses"
-      description="Track and manage all your contracts"
-      actionText="Add expense"
-      actionIcon={<Plus className="size-4" />}
-      onActionClick={onOpenClick}
-    >
-      <ExpensesTable onEditClick={handleEditExpenseClick} />
-      <ManageExpenseModal
-        isOpen={isOpen}
-        initialExpense={openedExpense ?? undefined}
-        onCloseClick={handleCloseModalClick}
-        onSaveClick={handleSaveExpenseClick}
-      />
-    </PageWrapper>
+    <HelmetWrapper route={ROUTES.EXPENSES}>
+      <PageWrapper
+        title="Expenses"
+        description="Track and manage all your contracts"
+        actionText="Add expense"
+        actionIcon={<Plus className="size-4" />}
+        onActionClick={onOpenClick}
+      >
+        <ExpensesTable onEditClick={handleEditExpenseClick} />
+        <ManageExpenseModal
+          isOpen={isOpen}
+          initialExpense={openedExpense ?? undefined}
+          onCloseClick={handleCloseModalClick}
+          onSaveClick={handleSaveExpenseClick}
+        />
+      </PageWrapper>
+    </HelmetWrapper>
   )
 }
 
