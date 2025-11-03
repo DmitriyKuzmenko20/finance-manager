@@ -1,39 +1,35 @@
 import { memo } from 'react'
-import { ExpensesTableProps } from './types'
+import { TargetsTableProps } from './types'
 import { DataTable } from '@/components'
-import { getActions, getExpenseColumns } from './utils'
-import { useExpenses } from './hooks'
+import { getActions, getTargetColumns } from './utils'
+import { useTargets } from './hooks'
 import { TableFilters } from './TableFilters'
 
-export const ExpensesTable = memo(({ onEditClick }: ExpensesTableProps) => {
+export const TargetsTable = memo(({ onEditClick }: TargetsTableProps) => {
   const {
-    expenses,
+    targets,
     selectedIds,
-    selectedCategories,
     handleSearchChange,
-    handleCategoriesChange,
     handleSelectChange,
     handleEditClick,
     handleDeleteClick,
     handleBulkDeleteClick,
-  } = useExpenses(onEditClick)
+  } = useTargets(onEditClick)
 
   const hasSelectedIds = !!selectedIds.length
 
-  const columns = getExpenseColumns()
+  const columns = getTargetColumns()
   const actions = getActions(handleEditClick, handleDeleteClick)
 
   return (
     <div className="mt-4">
       <TableFilters
         hasSelectedIds={hasSelectedIds}
-        selectedCategories={selectedCategories}
         onSearchChange={handleSearchChange}
-        onCategoriesChange={handleCategoriesChange}
         onBulkDeleteClick={handleBulkDeleteClick}
       />
       <DataTable
-        data={expenses}
+        data={targets}
         columns={columns}
         actions={actions}
         selectedIds={selectedIds}
