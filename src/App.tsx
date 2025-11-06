@@ -1,7 +1,7 @@
 import './App.css'
 import { useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from '@dr.pogodin/react-helmet'
 import { useThemeStore } from '@/store/themeStore'
 import { Routes } from '@/routes'
 import { MainLayout } from './layouts'
