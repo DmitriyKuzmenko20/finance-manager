@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   build: {
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -29,6 +30,9 @@ export default defineConfig({
             'tailwindcss-animate',
           ],
           utils: ['uuid'],
+          table: ['@tanstack/react-table'],
+          animations: ['framer-motion'],
+          datepicker: ['react-datepicker', 'date-fns'],
         },
       },
     },

@@ -43,11 +43,11 @@ export const DatePicker = memo(
           showIcon
           icon={<CalendarIcon className="absolute top-0 right-0 size-4 text-muted-foreground" />}
           className={clsx(
-            'flex w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-100 bg-transparent h-8 !px-2 py-1 text-sm shadow-sm cursor-pointer placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+            'flex w-full items-center justify-between whitespace-nowrap rounded-md border border-border bg-transparent h-8 !px-2 py-1 text-sm shadow-sm cursor-pointer placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
             error && 'ring-red-500'
           )}
           wrapperClassName="relative w-full"
-          calendarClassName="custom-date-picker !border-gray-100"
+          calendarClassName="custom-date-picker !border-border"
           onChange={onDateChange}
         />
         {error && <p className="mt-1 text-xs text-red-500">{error}</p>}

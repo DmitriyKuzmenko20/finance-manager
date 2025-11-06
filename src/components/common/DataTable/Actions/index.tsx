@@ -11,8 +11,8 @@ const ActionsComponent = <T,>({ actions, row }: ActionsProps<T>) => {
         if (selected) selected.action(row)
       }}
     >
-      <SelectTrigger hideIcon className="w-auto h-auto p-1 cursor-pointer border-none shadow-none hover:bg-gray-200">
-        <DotsIcon className="rotate-90 size-4 text-gray-600" />
+      <SelectTrigger hideIcon className="w-auto h-auto p-1 cursor-pointer border-none shadow-none hover:bg-muted">
+        <DotsIcon className="rotate-90 size-4 text-muted-foreground" />
       </SelectTrigger>
       <SelectContent className="w-32">
         {actions.map((action, index) => (

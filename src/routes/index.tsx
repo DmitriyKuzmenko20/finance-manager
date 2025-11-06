@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
-import { Routes as ReactRouter, Route } from 'react-router-dom'
+import { Routes as ReactRouter, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import { ROUTES } from './constant'
 import { RouteItem } from './types'
 import Dashboard from '@/pages/Dashboard'
@@ -45,11 +46,15 @@ const routList: RouteItem[] = [
 ]
 
 export const Routes = () => {
+  const location = useLocation()
+
   return (
-    <ReactRouter>
-      {routList.map((route) => {
-        return <Route key={route.path} {...route} />
-      })}
-    </ReactRouter>
+    <AnimatePresence mode="wait">
+      <ReactRouter location={location} key={location.pathname}>
+        {routList.map((route) => {
+          return <Route key={route.path} {...route} />
+        })}
+      </ReactRouter>
+    </AnimatePresence>
   )
 }

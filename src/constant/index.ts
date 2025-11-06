@@ -30,3 +30,8 @@ export const ASSET_CATEGORY = {
   STOCKS: 'Stocks',
   BONDS: 'Bonds',
 } as const
+
+export const THEME_TYPE = {
+  LIGHT: 'light',
+  DARK: 'dark',
+} as const

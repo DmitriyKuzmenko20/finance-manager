@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
 import { ApexOptions } from 'apexcharts'
 import { Expense } from '@/store/expensesStore/models'
+import { useThemeStore } from '@/store/themeStore'
 import { formatPrice } from '@/utils'
+import { THEME_TYPE } from '@/constant'
 
 type ChartData = {
   category: string
@@ -9,6 +11,8 @@ type ChartData = {
 }
 
 export const useDonutChartOptions = (expenses: Expense[]) => {
+  const theme = useThemeStore((state) => state.theme)
+
   return useMemo(() => {
     const grouped = expenses.reduce<Record<string, number>>((acc, { category, amount }) => {
       acc[category] = (acc[category] || 0) + amount
@@ -24,6 +28,8 @@ export const useDonutChartOptions = (expenses: Expense[]) => {
     const categories = sortedData.map((d) => d.category)
     const amountSeries = sortedData.map((d) => d.amount)
     const totalExpenses = Number(amountSeries.reduce((sum, v) => sum + v, 0).toFixed(2))
+
+    const labelColor = theme === THEME_TYPE.DARK ? '#f5f5f5' : '#0a0a0a'
 
     const options: ApexOptions = {
       chart: {
@@ -49,7 +55,7 @@ export const useDonutChartOptions = (expenses: Expense[]) => {
       },
       labels: categories,
       tooltip: {
-        theme: 'dark',
+        theme: theme === 'dark' ? 'dark' : 'light',
         y: {
           formatter: (value: number) => `${formatPrice(value)}`,
         },
@@ -68,7 +74,7 @@ export const useDonutChartOptions = (expenses: Expense[]) => {
               name: { show: false },
               value: {
                 show: true,
-                color: '#0a0a0a',
+                color: labelColor,
                 fontSize: '18px',
                 offsetY: 30,
                 formatter: (val: string) => formatPrice(Number(val)),
@@ -76,7 +82,7 @@ export const useDonutChartOptions = (expenses: Expense[]) => {
               total: {
                 show: true,
                 label: '',
-                color: '#0a0a0a',
+                color: labelColor,
                 fontSize: '18px',
                 formatter: () => formatPrice(totalExpenses),
               },
@@ -105,5 +111,5 @@ export const useDonutChartOptions = (expenses: Expense[]) => {
     }
 
     return { options, series: amountSeries, categories }
-  }, [expenses])
+  }, [expenses, theme])
 }

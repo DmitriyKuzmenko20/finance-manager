@@ -14,12 +14,14 @@ export const useExpenses = (onEditClick: (expense: Expense) => void) => {
     const searchableKeys = ['title', 'description', 'category', 'type', 'amount'] as const
 
     return expenses.filter((expense) => {
-      const matchesSearch = searchableKeys.some((key) => {
-        const value = expense[key]
-        return String(value).toLowerCase().includes(search.toLowerCase())
-      })
+      const matchesSearch =
+        !search ||
+        searchableKeys.some((key) => {
+          const value = expense[key]
+          return value && String(value).toLowerCase().includes(search.toLowerCase())
+        })
 
-      const matchesCategory = selectedCategories.includes(expense.category)
+      const matchesCategory = !selectedCategories.length || selectedCategories.includes(expense.category)
 
       return matchesSearch && matchesCategory
     })

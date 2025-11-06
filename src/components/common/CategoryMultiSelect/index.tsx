@@ -62,7 +62,7 @@ export const CategoryMultiSelect = memo(
         {label && <label className="text-sm font-medium text-foreground">{label}</label>}
         <div
           className={clsx(
-            'w-full min-h-8 mt-1 px-2 py-1.5 rounded-md border border-gray-100 text-sm shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-ring',
+            'w-full min-h-8 mt-1 px-2 py-1.5 rounded-md border border-border bg-background text-sm shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-ring',
             isDisabled && 'cursor-not-allowed opacity-50'
           )}
           onClick={onToggleDropdown}
@@ -82,7 +82,7 @@ export const CategoryMultiSelect = memo(
                       <CategoryLabel text={option.label} color={option.color} />
                       <button
                         type="button"
-                        className="p-0.5 rounded-full cursor-pointer hover:bg-gray-200"
+                        className="p-0.5 rounded-full cursor-pointer hover:bg-muted"
                         onClick={(e) => onRemoveCategoryClick(e, category)}
                       >
                         <X className="size-3" />
@@ -98,13 +98,13 @@ export const CategoryMultiSelect = memo(
           </div>
         </div>
         {isOpen && (
-          <div className="absolute w-full max-h-60 mt-1 z-2 border border-gray-100 rounded-md shadow-lg overflow-auto bg-white">
-            <div className="flex justify-between items-center p-2 border-b border-gray-100">
+          <div className="absolute w-full max-h-60 mt-1 z-2 border border-border rounded-md shadow-lg overflow-auto bg-popover">
+            <div className="flex justify-between items-center p-2 border-b border-border">
               <span className="text-xs font-medium text-muted-foreground">{selectedCategories.length} selected</span>
               {selectedCategories.length > 0 && (
                 <button
                   type="button"
-                  className="text-xs text-blue-600 cursor-pointer hover:text-blue-700"
+                  className="text-xs text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                   onClick={onClearAllClick}
                 >
                   Clear all
@@ -118,7 +118,7 @@ export const CategoryMultiSelect = memo(
                 return (
                   <div
                     key={option.value}
-                    className="flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-gray-50"
+                    className="flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-accent"
                     onClick={() => onToggleCategory(option.value)}
                   >
                     <Checkbox checked={isSelected} />

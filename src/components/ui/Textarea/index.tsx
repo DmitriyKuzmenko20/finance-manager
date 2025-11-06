@@ -39,14 +39,14 @@ export const Textarea = memo(
           {...register}
           disabled={isDisabled}
           className={cn(
-            'w-full rounded-md border border-gray-100 pl-2 pr-8 pt-1 pb-8 resize-none text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+            'w-full rounded-md border border-border bg-background pl-2 pr-8 pt-1 pb-8 resize-none text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
             className
           )}
           {...props}
           onChange={onChange}
         />
         {maxCharacters && (
-          <div className="absolute bottom-2 right-2 flex justify-end w-[calc(100%-20px)] text-[10px] text-gray-400">
+          <div className="absolute bottom-2 right-2 flex justify-end w-[calc(100%-20px)] text-[10px] text-muted-foreground">
             {characterCount}/{maxCharacters}
           </div>
         )}

@@ -5,11 +5,11 @@ import { useAssetsStore } from '@/store'
 import { Asset } from '@/store/assetsStore/models'
 import { useModal } from '@/hooks'
 import { ROUTES } from '@/routes/constant'
+import { ASSET_TYPE } from '@/constant'
 import { AssetFormValues } from './ManageAssetModal/hooks'
 import { HelmetWrapper, PageWrapper } from '@/components'
 import { AssetsTable } from './AssetsTable'
 import { ManageAssetModal } from './ManageAssetModal'
-import { ASSET_TYPE } from '@/constant'
 
 const Assets = () => {
   const [openedAsset, setOpenedAsset] = useState<Asset | null>(null)

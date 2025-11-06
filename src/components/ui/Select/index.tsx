@@ -18,7 +18,7 @@ const SelectValue = SelectPrimitive.Value
 const SelectTrigger = ({ className, children, hideIcon, ...props }: SelectTriggerProps) => (
   <SelectPrimitive.Trigger
     className={cn(
-      'flex w-full items-center justify-between whitespace-nowrap rounded-md border border-gray-100 bg-transparent h-8 px-2 py-1 text-sm shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      'flex w-full items-center justify-between whitespace-nowrap rounded-md border border-border bg-background h-8 px-2 py-1 text-sm shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className
     )}
     {...props}
