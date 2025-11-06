@@ -27,18 +27,18 @@ export const UploadModal = memo(
         <>
           <div
             className={
-              'flex flex-col items-center justify-center w-full h-[200px] p-8 rounded-md cursor-pointer border border-dashed border-gray-200 transition-colors duration-200 hover:bg-indigo-50 hover:border-indigo-500'
+              'flex flex-col items-center justify-center w-full h-[200px] p-8 rounded-md cursor-pointer border border-dashed border-border transition-colors duration-200 hover:bg-muted hover:border-primary'
             }
             onClick={onUploadFileClick}
           >
-            <Image className="w-6 h-6 !text-gray-600" />
+            <Image className="w-6 h-6 !text-muted-foreground" />
             {!fileName ? (
               <>
-                <p className="mt-4 text-sm font-medium text-zinc-950">Attach your file here</p>
-                <p className="mt-1.5 text-xs text-gray-600">CSV format up to 10 mb</p>
+                <p className="mt-4 text-sm font-medium text-foreground">Attach your file here</p>
+                <p className="mt-1.5 text-xs text-muted-foreground">CSV format up to 10 mb</p>
               </>
             ) : (
-              <p className="mt-4 text-sm font-medium text-zinc-950">{fileName}</p>
+              <p className="mt-4 text-sm font-medium text-foreground">{fileName}</p>
             )}
             {hasErrors && (
               <div className="grid gap-1 max-h-64 mt-2 overflow-y-auto no-scrollbar">

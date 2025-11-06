@@ -23,8 +23,8 @@ export const StatsItem = memo(({ value, label, icon, cardClassName }: StatsItemP
   return (
     <motion.div variants={itemVariants} className={clsx('px-4 py-6 rounded-xl', cardClassName)}>
       <div className="flex justify-center items-center size-10 rounded-lg p-2">{icon}</div>
-      <label className="mt-8 text-xs leading-[18px] font-medium text-gray-400">{label}</label>
-      <p className="text-base font-medium text-zinc-950 md:text-2xl md:leading-6">{formattedValue}</p>
+      <label className="mt-8 text-xs leading-[18px] font-medium text-muted-foreground">{label}</label>
+      <p className="text-base font-medium text-foreground md:text-2xl md:leading-6">{formattedValue}</p>
     </motion.div>
   )
 })

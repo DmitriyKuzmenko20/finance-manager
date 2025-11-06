@@ -6,6 +6,7 @@ import { SidebarProps } from './types'
 import { Logo } from '@/assets'
 import { menu } from '../constant'
 import { MenuItem } from './MenuItem'
+import { ThemeToggle } from './ThemeToggle'
 
 export const SideBar = memo(({ isShowSidebar, toggleShowSidebar }: SidebarProps) => {
   return (
@@ -24,7 +25,7 @@ export const SideBar = memo(({ isShowSidebar, toggleShowSidebar }: SidebarProps)
         )}
         aria-label="Sidebar"
       >
-        <div>
+        <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-2">
             <Link to="/" className="flex items-center gap-2">
               <Logo className="w-10 h-10 rounded" />
@@ -34,13 +35,16 @@ export const SideBar = memo(({ isShowSidebar, toggleShowSidebar }: SidebarProps)
               <X className=" size-5" />
             </button>
           </div>
-          <nav aria-label="Sidebar Navigation">
+          <nav aria-label="Sidebar Navigation" className="flex-1">
             <ul className="grid gap-2 p-2">
               {menu.map((menuItem) => (
                 <MenuItem key={menuItem.path} {...menuItem} />
               ))}
             </ul>
           </nav>
+          <div className="p-2 mt-auto">
+            <ThemeToggle />
+          </div>
         </div>
       </aside>
     </>

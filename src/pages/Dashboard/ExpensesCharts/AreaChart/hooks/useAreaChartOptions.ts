@@ -3,10 +3,15 @@ import { ApexOptions } from 'apexcharts'
 import { parse } from 'date-fns'
 import { Expense } from '@/store/expensesStore/models'
 import { formatPrice } from '@/utils'
+import { useThemeStore } from '@/store/themeStore'
+import { THEME_TYPE } from '@/constant'
 
 export const useAreaChartOptions = (expenses: Expense[]) => {
+  const theme = useThemeStore((state) => state.theme)
+
   return useMemo(() => {
     const groupedExpenses: Record<string, number> = {}
+    const isDarkTheme = theme === THEME_TYPE.DARK
 
     expenses.forEach(({ amount, date }) => {
       const d = parse(date, 'dd/MM/yyyy', new Date())
@@ -28,11 +33,16 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
       }))
       .sort((a, b) => a.x - b.x)
 
+    const primaryColor = isDarkTheme ? '#60a5fa' : '#3b82f6'
+    const textColor = isDarkTheme ? '#a1a1aa' : '#525866'
+    const markerBgColor = isDarkTheme ? '#18181b' : '#ffffff'
+    const tooltipBgColor = isDarkTheme ? '#27272a' : '#0E121B'
+
     const seriesData = [
       {
         name: 'Expenses',
         data: formattedSeries,
-        color: '#3b82f6',
+        color: primaryColor,
       },
     ]
 
@@ -60,12 +70,12 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
           colorStops: [
             {
               offset: 0,
-              color: '#3b82f6',
+              color: primaryColor,
               opacity: 0.2,
             },
             {
               offset: 90,
-              color: '#3b82f6',
+              color: primaryColor,
               opacity: 0,
             },
           ],
@@ -77,8 +87,8 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
       },
       markers: {
         size: 0,
-        strokeColors: '#3b82f6',
-        colors: '#ffffff',
+        strokeColors: primaryColor,
+        colors: markerBgColor,
         strokeWidth: 2,
         hover: {
           size: 5,
@@ -96,7 +106,7 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
             return month
           },
           style: {
-            colors: '#525866',
+            colors: textColor,
             fontFamily: 'inherit',
             fontSize: '12px',
           },
@@ -116,7 +126,7 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
         labels: {
           formatter: (value) => formatPrice(value),
           style: {
-            colors: '#71717A',
+            colors: textColor,
             fontFamily: 'inherit',
             fontSize: '12px',
           },
@@ -136,11 +146,11 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
           const price = formatPrice(value)
 
           return `
-              <div style="padding-top: 8px; padding-bottom: 8px; padding-left: 10px; padding-right: 10px; border-radius: 8px; background-color: #0E121B;">
+              <div style="padding-top: 8px; padding-bottom: 8px; padding-left: 10px; padding-right: 10px; border-radius: 8px; background-color: ${tooltipBgColor};">
                   <p style="font-size: 12px; line-height: 16px; font-weight: 600; color: #ffffff;">${formattedDate}</p>
                   <p style="margin-top: 6px; font-size: 12px; line-height: 16px; color: #ffffff;">${price}</p>
               </div>
-          `;
+          `
         },
       },
       legend: {
@@ -155,5 +165,5 @@ export const useAreaChartOptions = (expenses: Expense[]) => {
       options,
       series: seriesData,
     }
-  }, [expenses])
+  }, [expenses, theme])
 }

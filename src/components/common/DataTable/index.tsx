@@ -10,7 +10,7 @@ import {
   RowSelectionState,
   useReactTable,
 } from '@tanstack/react-table'
-import { motion, Variants } from 'framer-motion'
+import { motion, Variants, AnimatePresence } from 'framer-motion'
 import { DataTableProps } from './types'
 import { Button, Checkbox, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components'
 import { EmptyData } from './EmptyData'
@@ -25,6 +25,27 @@ const tableVariants: Variants = {
       type: 'spring',
       stiffness: 120,
       damping: 15,
+    },
+  },
+}
+
+const rowVariants: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: i * 0.03,
+      duration: 0.1,
+      ease: 'easeOut',
+    },
+  }),
+  exit: {
+    opacity: 0,
+    x: 20,
+    transition: {
+      duration: 0.1,
+      ease: 'easeIn',
     },
   },
 }
@@ -147,13 +168,25 @@ const DataTableComponent = <T extends { id: string }>({
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
+              <AnimatePresence mode="popLayout">
+                {table.getRowModel().rows.map((row, index) => (
+                  <motion.tr
+                    key={row.id}
+                    custom={index}
+                    variants={rowVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    layout
+                    data-state={row.getIsSelected() && 'selected'}
+                    className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </motion.tr>
+                ))}
+              </AnimatePresence>
             </TableBody>
           </Table>
         ) : (

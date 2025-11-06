@@ -10,11 +10,6 @@ export const TableFilters = memo(
     return (
       <div className="flex flex-wrap items-end gap-2">
         <DebouncedSearchInput placeholder="Search..." containerClassName="!w-52" onDebounceChange={onSearchChange} />
-        {hasSelectedIds && (
-          <Button variant="critical" onClick={onBulkDeleteClick}>
-            Delete
-          </Button>
-        )}
         <Dropdown
           options={typeOptions}
           selectedValue={typeFilter || ''}
@@ -24,6 +19,11 @@ export const TableFilters = memo(
           containerClassName="max-w-52"
           onChange={onTypeFilterChange}
         />
+        {hasSelectedIds && (
+          <Button variant="critical" onClick={onBulkDeleteClick}>
+            Delete
+          </Button>
+        )}
       </div>
     )
   }

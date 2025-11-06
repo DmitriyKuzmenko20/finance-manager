@@ -16,7 +16,7 @@ export const DonutChart = memo(({ expenses }: DonutChartProps) => {
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: options.colors?.[i % options.colors.length] }}
             />
-            <span className="text-sm text-gray-800">{category}</span>
+            <span className="text-sm text-muted-foreground">{category}</span>
           </div>
         ))}
       </div>

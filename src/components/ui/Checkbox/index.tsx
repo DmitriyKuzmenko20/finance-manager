@@ -8,7 +8,8 @@ export const Checkbox = memo(({ className, ...props }: CheckboxProps) => {
   return (
     <CheckboxPrimitive.Root
       className={cn(
-        'relative peer h-5 w-5 shrink-0 rounded-sm border shadow cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+        'relative peer h-5 w-5 shrink-0 rounded-sm border border-border bg-background shadow cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+        'data-[state=checked]:bg-background data-[state=checked]:text-foreground data-[state=checked]:border-border',
         className
       )}
       {...props}

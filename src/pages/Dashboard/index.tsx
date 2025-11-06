@@ -10,20 +10,20 @@ const stats = [
   {
     label: 'Total stocks',
     category: ASSET_CATEGORY.STOCKS,
-    cardClassName: 'bg-blue-50',
-    icon: <TrendingUp className="size-6 text-blue-500" />,
+    cardClassName: 'bg-blue-50 dark:bg-blue-950',
+    icon: <TrendingUp className="size-6 text-blue-500 dark:text-blue-400" />,
   },
   {
     label: 'Total crypto',
     category: ASSET_CATEGORY.CRYPTO,
-    cardClassName: 'bg-orange-50',
-    icon: <Coins className="size-6 text-orange-500" />,
+    cardClassName: 'bg-orange-50 dark:bg-orange-950',
+    icon: <Coins className="size-6 text-orange-500 dark:text-orange-400" />,
   },
   {
     label: 'Total bonds',
     category: ASSET_CATEGORY.BONDS,
-    cardClassName: 'bg-green-50',
-    icon: <Link className="size-6 text-green-500" />,
+    cardClassName: 'bg-green-50 dark:bg-green-950',
+    icon: <Link className="size-6 text-green-500 dark:text-green-400" />,
   },
 ]
 

@@ -10,7 +10,7 @@ export const Header = memo(({ toggleShowSidebar }: HeaderProps) => {
   const currentMenuItem = menu.find((m) => location.pathname === m.path)
 
   return (
-    <header className="sticky top-0 py-4 px-8 z-5 border-b border-solid border-gray-100">
+    <header className="sticky top-0 py-4 px-8 z-5 border-b border-solid border-border bg-card">
       <div className="flex items-center gap-4">
         <button className="hidden tablet:block" onClick={toggleShowSidebar}>
           <Menu className="w-5 h-5" />
