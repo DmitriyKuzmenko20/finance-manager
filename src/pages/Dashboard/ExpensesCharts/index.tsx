@@ -20,7 +20,7 @@ export const ExpensesCharts = ({ expenses }: ExpensesChartsProps) => {
       <WidgetTitle title="Total Expenses" subTitle="See your expenses" icon={<NotepadText className="size-4" />} />
       <div className="flex flex-col items-center justify-center min-h-96">
         {hasExpenses ? (
-          <div className="grid grid-col-1 gap-4 md:grid-cols-[1fr_auto_1fr]">
+          <div className="grid grid-col-1 gap-4 md:grid-cols-[1fr_auto_1fr] w-full">
             <Suspense fallback={<ChartSkeleton />}>
               <DonutChart expenses={expenses} />
             </Suspense>
