@@ -9,6 +9,7 @@ import { HelmetWrapper } from '@/components'
 const Expenses = lazy(() => import('../pages/Expenses'))
 const Assets = lazy(() => import('../pages/Assets'))
 const Targets = lazy(() => import('../pages/Targets'))
+const Testing = lazy(() => import('../pages/Testing'))
 
 const routList: RouteItem[] = [
   {
@@ -40,6 +41,14 @@ const routList: RouteItem[] = [
     element: (
       <Suspense>
         <Targets />
+      </Suspense>
+    ),
+  },
+  {
+    path: ROUTES.TESTING,
+    element: (
+      <Suspense>
+        <Testing />
       </Suspense>
     ),
   },
