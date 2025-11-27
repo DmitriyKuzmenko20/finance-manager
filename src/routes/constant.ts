@@ -3,4 +3,5 @@ export const ROUTES = {
   EXPENSES: '/expenses',
   ASSETS: '/assets',
   TARGETS: '/targets',
+  TESTING: '/testing'
 } as const

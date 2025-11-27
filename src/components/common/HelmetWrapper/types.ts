@@ -1,6 +1,6 @@
-import { RouteValue } from '@/routes/types'
+import { metaTagsData } from './constant'
 
 export type HelmetWrapperProps = {
-  route: RouteValue
+  route: keyof typeof metaTagsData
   children: React.ReactNode
 }
